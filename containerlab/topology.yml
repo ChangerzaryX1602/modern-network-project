@@ -1,6 +1,10 @@
 ---
 name: srlinux-network-lab
 
+mgmt:
+  network: clab-mgmt
+  ipv4-subnet: 172.30.30.0/24
+
 topology:
   defaults:
     kind: nokia_srlinux
@@ -10,15 +14,15 @@ topology:
 
   nodes:
     srl1:
-      mgmt-ipv4: 172.20.20.2
+      mgmt-ipv4: 172.30.30.2
       startup-config: configs/srl1.cli
 
     srl2:
-      mgmt-ipv4: 172.20.20.3
+      mgmt-ipv4: 172.30.30.3
       startup-config: configs/srl2.cli
 
     srl3:
-      mgmt-ipv4: 172.20.20.4
+      mgmt-ipv4: 172.30.30.4
       startup-config: configs/srl3.cli
 
   links:
