@@ -1,0 +1,164 @@
+{
+  "name": "srlinux-network-lab",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-a3adc672444c",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "3fff:172:20:20::/64",
+        "ipv6-gw": "3fff:172:20:20::1",
+        "external-access": true
+      }
+    }
+  },
+  "ssh-pub-keys": ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAErz1u/gQSznZLYOICQpGiIojhNzDLzX+VYFtQmnRP6"],
+  "nodes": {
+    "srl1": {
+      "index": "0",
+      "shortname": "srl1",
+      "longname": "clab-srlinux-network-lab-srl1",
+      "fqdn": "srl1.srlinux-network-lab.io",
+      "group": "",
+      "labdir": "/Users/changerzaryx/Documents/modern-network-project/containerlab/clab-srlinux-network-lab/srl1",
+      "kind": "nokia_srlinux",
+      "image": "ghcr.io/nokia/srlinux:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "1a:3f:00:00:00:00",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-a3adc672444c",
+        "clab-node-group": "",
+        "clab-node-kind": "nokia_srlinux",
+        "clab-node-lab-dir": "/Users/changerzaryx/Documents/modern-network-project/containerlab/clab-srlinux-network-lab/srl1",
+        "clab-node-longname": "clab-srlinux-network-lab-srl1",
+        "clab-node-name": "srl1",
+        "clab-node-type": "ixr-d2l",
+        "clab-owner": "changerzaryx",
+        "clab-topo-file": "/Users/changerzaryx/Documents/modern-network-project/containerlab/topology.yml",
+        "containerlab": "srlinux-network-lab"
+      },
+      "port-bindings": [
+      ]
+    },
+    "srl2": {
+      "index": "1",
+      "shortname": "srl2",
+      "longname": "clab-srlinux-network-lab-srl2",
+      "fqdn": "srl2.srlinux-network-lab.io",
+      "group": "",
+      "labdir": "/Users/changerzaryx/Documents/modern-network-project/containerlab/clab-srlinux-network-lab/srl2",
+      "kind": "nokia_srlinux",
+      "image": "ghcr.io/nokia/srlinux:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "1a:04:01:00:00:00",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-a3adc672444c",
+        "clab-node-group": "",
+        "clab-node-kind": "nokia_srlinux",
+        "clab-node-lab-dir": "/Users/changerzaryx/Documents/modern-network-project/containerlab/clab-srlinux-network-lab/srl2",
+        "clab-node-longname": "clab-srlinux-network-lab-srl2",
+        "clab-node-name": "srl2",
+        "clab-node-type": "ixr-d2l",
+        "clab-owner": "changerzaryx",
+        "clab-topo-file": "/Users/changerzaryx/Documents/modern-network-project/containerlab/topology.yml",
+        "containerlab": "srlinux-network-lab"
+      },
+      "port-bindings": [
+      ]
+    },
+    "srl3": {
+      "index": "2",
+      "shortname": "srl3",
+      "longname": "clab-srlinux-network-lab-srl3",
+      "fqdn": "srl3.srlinux-network-lab.io",
+      "group": "",
+      "labdir": "/Users/changerzaryx/Documents/modern-network-project/containerlab/clab-srlinux-network-lab/srl3",
+      "kind": "nokia_srlinux",
+      "image": "ghcr.io/nokia/srlinux:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "1a:2a:02:00:00:00",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-a3adc672444c",
+        "clab-node-group": "",
+        "clab-node-kind": "nokia_srlinux",
+        "clab-node-lab-dir": "/Users/changerzaryx/Documents/modern-network-project/containerlab/clab-srlinux-network-lab/srl3",
+        "clab-node-longname": "clab-srlinux-network-lab-srl3",
+        "clab-node-name": "srl3",
+        "clab-node-type": "ixr-d2l",
+        "clab-owner": "changerzaryx",
+        "clab-topo-file": "/Users/changerzaryx/Documents/modern-network-project/containerlab/topology.yml",
+        "containerlab": "srlinux-network-lab"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "endpoints": {
+        "a": {
+          "node": "srl1",
+          "interface": "e1-1",
+          "mac": "aa:c1:ab:b9:78:53",
+          "peer": "z"
+        },
+        "z": {
+          "node": "srl2",
+          "interface": "e1-1",
+          "mac": "aa:c1:ab:75:41:6e",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "srl1",
+          "interface": "e1-2",
+          "mac": "aa:c1:ab:bb:3b:a2",
+          "peer": "z"
+        },
+        "z": {
+          "node": "srl3",
+          "interface": "e1-1",
+          "mac": "aa:c1:ab:a3:d2:9d",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "srl2",
+          "interface": "e1-2",
+          "mac": "aa:c1:ab:79:1a:9c",
+          "peer": "z"
+        },
+        "z": {
+          "node": "srl3",
+          "interface": "e1-2",
+          "mac": "aa:c1:ab:a7:d4:4e",
+          "peer": "a"
+        }
+      }
+    }
+  ]
+}

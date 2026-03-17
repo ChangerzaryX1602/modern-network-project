@@ -1,143 +1,27 @@
 ---
-name: cisco-network-lab
+name: srlinux-network-lab
 
 topology:
+  defaults:
+    kind: nokia_srlinux
+  kinds:
+    nokia_srlinux:
+      image: ghcr.io/nokia/srlinux:latest
+
   nodes:
-    router1:
-      kind: cisco_iosv
-      image: vrnetlab/vr-routeros:latest
+    srl1:
       mgmt-ipv4: 172.20.20.2
-      startup-config: |
-        hostname R01-CORE
-        !
-        service password-encryption
-        !
-        username admin privilege 15 secret admin
-        !
-        interface GigabitEthernet1
-         ip address 10.0.12.1 255.255.255.0
-         no shutdown
-        !
-        interface GigabitEthernet2
-         ip address 10.0.13.1 255.255.255.0
-         no shutdown
-        !
-        ip route 0.0.0.0 0.0.0.0 10.0.12.2
-        !
-        ntp server 10.0.0.1
-        !
-        logging buffered 16384
-        logging host 10.0.0.10
-        !
-        banner login ^
-        *** Authorized Access Only ***
-        ^
-        !
-        ip access-list extended MGMT-ACL
-         permit tcp any any eq 22
-         deny tcp any any eq 23
-         permit icmp any any
-        !
-        line vty 0 4
-         transport input ssh
-         access-class MGMT-ACL in
-        !
-        vlan 10
-         name DATA
-        vlan 20
-         name VOICE
-        vlan 30
-         name MGMT
+      startup-config: configs/srl1.cli
 
-    router2:
-      kind: cisco_iosv
-      image: vrnetlab/vr-routeros:latest
+    srl2:
       mgmt-ipv4: 172.20.20.3
-      startup-config: |
-        hostname R02-DIST
-        !
-        service password-encryption
-        !
-        username admin privilege 15 secret admin
-        !
-        interface GigabitEthernet1
-         ip address 10.0.12.2 255.255.255.0
-         no shutdown
-        !
-        interface GigabitEthernet2
-         ip address 10.0.24.1 255.255.255.0
-         no shutdown
-        !
-        ip route 0.0.0.0 0.0.0.0 10.0.12.1
-        !
-        ntp server 10.0.0.1
-        !
-        logging buffered 16384
-        logging host 10.0.0.10
-        !
-        banner login ^
-        *** Authorized Access Only ***
-        ^
-        !
-        ip access-list extended MGMT-ACL
-         permit tcp any any eq 22
-         deny tcp any any eq 23
-         permit icmp any any
-        !
-        line vty 0 4
-         transport input ssh
-         access-class MGMT-ACL in
-        !
-        vlan 10
-         name DATA
-        vlan 20
-         name VOICE
-        vlan 30
-         name MGMT
+      startup-config: configs/srl2.cli
 
-    switch1:
-      kind: cisco_iosv
-      image: vrnetlab/vr-routeros:latest
+    srl3:
       mgmt-ipv4: 172.20.20.4
-      startup-config: |
-        hostname SW01-ACC
-        !
-        service password-encryption
-        !
-        username admin privilege 15 secret admin
-        !
-        interface GigabitEthernet0/0
-         no shutdown
-        !
-        interface GigabitEthernet0/1
-         no shutdown
-        !
-        ntp server 10.0.0.1
-        !
-        logging buffered 16384
-        logging host 10.0.0.10
-        !
-        banner login ^
-        *** Authorized Access Only ***
-        ^
-        !
-        ip access-list extended MGMT-ACL
-         permit tcp any any eq 22
-         deny tcp any any eq 23
-         permit icmp any any
-        !
-        line vty 0 4
-         transport input ssh
-         access-class MGMT-ACL in
-        !
-        vlan 10
-         name DATA
-        vlan 20
-         name VOICE
-        vlan 30
-         name MGMT
+      startup-config: configs/srl3.cli
 
   links:
-    - endpoints: ["router1:eth1", "router2:eth1"]
-    - endpoints: ["router1:eth2", "switch1:eth1"]
-    - endpoints: ["router2:eth2", "switch1:eth2"]
+    - endpoints: ["srl1:e1-1", "srl2:e1-1"]
+    - endpoints: ["srl1:e1-2", "srl3:e1-1"]
+    - endpoints: ["srl2:e1-2", "srl3:e1-2"]

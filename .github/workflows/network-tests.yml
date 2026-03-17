@@ -6,40 +6,32 @@ on:
 
 jobs:
   network-testing:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 30
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-          cache: "pip"
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Install Containerlab
-        run: |
-          bash -c "$(curl -sL https://get.containerlab.dev)"
+      - name: Install Python dependencies
+        run: pip3 install --break-system-packages -r requirements.txt
 
       - name: Deploy network lab
         run: |
           sudo containerlab deploy -t containerlab/topology.yml --reconfigure
           echo "Waiting for devices to boot..."
-          sleep 60
+          sleep 30
 
       - name: Run reachability tests
-        run: pytest tests/test_reachability.py -v --tb=short --junitxml=results/reachability.xml
+        run: |
+          mkdir -p results
+          python3 -m pytest tests/test_reachability.py -v --tb=short --junitxml=results/reachability.xml
 
       - name: Run config compliance tests
-        run: pytest tests/test_config_compliance.py -v --tb=short --junitxml=results/compliance.xml
+        run: python3 -m pytest tests/test_config_compliance.py -v --tb=short --junitxml=results/compliance.xml
 
       - name: Run security policy tests
-        run: pytest tests/test_security_policy.py -v --tb=short --junitxml=results/security.xml
+        run: python3 -m pytest tests/test_security_policy.py -v --tb=short --junitxml=results/security.xml
 
       - name: Upload test results
         if: always()
@@ -50,4 +42,4 @@ jobs:
 
       - name: Destroy network lab
         if: always()
-        run: sudo containerlab destroy -t containerlab/topology.yml
+        run: sudo containerlab destroy -t containerlab/topology.yml --cleanup

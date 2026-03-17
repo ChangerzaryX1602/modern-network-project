@@ -1,0 +1,39 @@
+set / system name host-name LEAF1-ACC
+
+set / interface ethernet-1/1 admin-state enable
+set / interface ethernet-1/1 subinterface 0 ipv4 admin-state enable
+set / interface ethernet-1/1 subinterface 0 ipv4 address 10.0.13.2/24
+
+set / interface ethernet-1/2 admin-state enable
+set / interface ethernet-1/2 subinterface 0 ipv4 admin-state enable
+set / interface ethernet-1/2 subinterface 0 ipv4 address 10.0.24.2/24
+
+set / network-instance default type default
+set / network-instance default interface ethernet-1/1.0
+set / network-instance default interface ethernet-1/2.0
+
+set / network-instance default next-hop-groups group to-srl1 nexthop 0 ip-address 10.0.13.1
+set / network-instance default static-routes route 10.0.12.0/24 next-hop-group to-srl1
+
+set / network-instance DATA type mac-vrf
+set / network-instance VOICE type mac-vrf
+set / network-instance MGMT-VRF type mac-vrf
+
+set / system ntp admin-state enable
+set / system ntp network-instance mgmt
+set / system ntp server 10.0.0.1
+
+set / system logging remote-server 10.0.0.10 network-instance mgmt
+
+set / system banner login-banner "*** Authorized Access Only ***"
+
+set / acl acl-filter MGMT-FILTER type ipv4 entry 100 match ipv4 protocol tcp
+set / acl acl-filter MGMT-FILTER type ipv4 entry 100 match transport destination-port value 22
+set / acl acl-filter MGMT-FILTER type ipv4 entry 100 action accept
+
+set / acl acl-filter MGMT-FILTER type ipv4 entry 110 match ipv4 protocol tcp
+set / acl acl-filter MGMT-FILTER type ipv4 entry 110 match transport destination-port value 23
+set / acl acl-filter MGMT-FILTER type ipv4 entry 110 action drop
+
+set / acl acl-filter MGMT-FILTER type ipv4 entry 120 match ipv4 protocol icmp
+set / acl acl-filter MGMT-FILTER type ipv4 entry 120 action accept

@@ -50,12 +50,10 @@ def device_outputs(device_connections):
     Returns: {device_name: {command: output}}
     """
     commands = [
-        "show ip interface brief",
-        "show ip route",
-        "show running-config",
-        "show vlan brief",
-        "show ntp status",
-        "show access-lists",
+        "show interface brief",
+        "show network-instance default route-table ipv4-unicast summary",
+        "info flat /",
+        "show network-instance summary",
     ]
     outputs = {}
     for name, conn in device_connections.items():
