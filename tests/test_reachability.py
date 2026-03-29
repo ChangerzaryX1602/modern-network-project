@@ -56,7 +56,7 @@ class TestRoutingTable:
         self, device_name, device_outputs, inventory
     ):
         output = device_outputs[device_name][
-            "show network-instance default route-table ipv4-unicast summary"
+            "show network-instance default route-table all"
         ]
         targets = inventory[device_name]["expected"]["ping_targets"]
 
