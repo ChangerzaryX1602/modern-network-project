@@ -55,9 +55,7 @@ class TestRoutingTable:
     def test_routing_table_entries(
         self, device_name, device_outputs, inventory
     ):
-        output = device_outputs[device_name][
-            "info from state /network-instance[name=default] route-table"
-        ]
+        output = device_outputs[device_name]["info flat /"]
         targets = inventory[device_name]["expected"]["ping_targets"]
 
         for target in targets:
