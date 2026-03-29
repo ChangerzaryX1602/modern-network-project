@@ -51,7 +51,7 @@ def device_outputs(device_connections):
     """
     commands = [
         "show interface brief",
-        "show network-instance default route-table",
+        "info from state /network-instance[name=default] route-table",
         "info flat /",
         "show network-instance summary",
     ]
