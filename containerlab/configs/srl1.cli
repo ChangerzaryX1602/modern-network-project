@@ -21,7 +21,6 @@ set / network-instance MGMT-VRF type mac-vrf
 
 set / system ntp admin-state enable
 set / system ntp network-instance mgmt
-set / system ntp server 10.0.0.1
 
 set / system logging remote-server 10.0.0.10 network-instance mgmt
 
