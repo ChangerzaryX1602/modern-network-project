@@ -19,7 +19,7 @@ jobs:
       - name: Deploy network lab
         run: |
           sudo containerlab deploy -t containerlab/topology.yml --reconfigure
-          echo "Waiting for devices to boot..."
+          echo "Waiting for devices to boot...."
           sleep 30
 
       - name: Run reachability tests
