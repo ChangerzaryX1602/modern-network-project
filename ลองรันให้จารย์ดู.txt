@@ -1,0 +1,24 @@
+sudo containerlab deploy -t containerlab/topology.yml --reconfigure
+sudo containerlab inspect -t containerlab/topology.yml
+
+
+Test ให้จารย์ดู ยกตัวอย่างไม่กี่อันพอ เดี๋ยวนาน
+Config Compliance
+1.Test มาตรฐานการตั้งชื่อ Hostname
+set / system name host-name SRL1-CORE (เปลี่ยนชื่อ)
+
+2.Test time server
+set / system ntp server 10.0.0.1 (ลบทิ้ง)
+
+Security Policy
+3.ลองอนุญาต Firewall Telnet
+set / acl acl-filter MGMT-FILTER type ipv4 entry 110 action drop
+เปลี่ยนเป็น
+set / acl acl-filter MGMT-FILTER type ipv4 entry 110 action accept
+
+Reachable
+4.ลองทำให้อยู่คนละวง
+set / interface ethernet-1/2 subinterface 0 ipv4 address 10.0.13.1/24
+เปลี่ยนเป็น
+set / interface ethernet-1/2 subinterface 0 ipv4 address 10.99.99.1/24
+
