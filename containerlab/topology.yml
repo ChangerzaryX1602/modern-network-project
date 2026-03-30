@@ -14,7 +14,7 @@ topology:
 
   nodes:
     srl1:
-      mgmt-ipv4: 192.168.30.2
+      mgmt-ipv4: 172.30.30.2
       startup-config: configs/srl1.cli
 
     srl2:
