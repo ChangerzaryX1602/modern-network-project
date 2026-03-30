@@ -40,6 +40,3 @@ jobs:
           name: test-results
           path: results/
 
-      - name: Destroy network lab
-        if: always()
-        run: sudo containerlab destroy -t containerlab/topology.yml --cleanup
