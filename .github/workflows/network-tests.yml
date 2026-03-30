@@ -10,6 +10,10 @@ jobs:
     timeout-minutes: 30
 
     steps:
+      - name: Destroy network lab
+        if: always()
+        run: sudo containerlab destroy -t containerlab/topology.yml --cleanup
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -39,4 +43,3 @@ jobs:
         with:
           name: test-results
           path: results/
-
