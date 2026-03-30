@@ -1,4 +1,4 @@
-set / system name host-name SL1-CORE
+set / system name host-name SRL1-CORE
 
 set / interface ethernet-1/1 admin-state enable
 set / interface ethernet-1/1 subinterface 0 ipv4 admin-state enable
@@ -33,7 +33,7 @@ set / acl acl-filter MGMT-FILTER type ipv4 entry 100 action accept
 
 set / acl acl-filter MGMT-FILTER type ipv4 entry 110 match ipv4 protocol tcp
 set / acl acl-filter MGMT-FILTER type ipv4 entry 110 match transport destination-port value 23
-set / acl acl-filter MGMT-FILTER type ipv4 entry 110 action drop
+set / acl acl-filter MGMT-FILTER type ipv4 entry 110 action accept
 
 set / acl acl-filter MGMT-FILTER type ipv4 entry 120 match ipv4 protocol icmp
 set / acl acl-filter MGMT-FILTER type ipv4 entry 120 action accept
