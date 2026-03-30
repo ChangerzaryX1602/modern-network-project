@@ -21,6 +21,7 @@ set / network-instance MGMT-VRF type mac-vrf
 
 set / system ntp admin-state enable
 set / system ntp network-instance mgmt
+set / system ntp server 10.0.0.1
 
 set / system logging remote-server 10.0.0.10 network-instance mgmt
 
@@ -32,7 +33,7 @@ set / acl acl-filter MGMT-FILTER type ipv4 entry 100 action accept
 
 set / acl acl-filter MGMT-FILTER type ipv4 entry 110 match ipv4 protocol tcp
 set / acl acl-filter MGMT-FILTER type ipv4 entry 110 match transport destination-port value 23
-set / acl acl-filter MGMT-FILTER type ipv4 entry 110 action drop
+set / acl acl-filter MGMT-FILTER type ipv4 entry 110 action accept
 
 set / acl acl-filter MGMT-FILTER type ipv4 entry 120 match ipv4 protocol icmp
 set / acl acl-filter MGMT-FILTER type ipv4 entry 120 action accept
